@@ -5,7 +5,6 @@ import com.example.API.StudentManagementService.DTO.CreateStudentDto;
 import com.example.API.StudentManagementService.DTO.StudentDto;
 import com.example.API.StudentManagementService.servise.StudentService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequiredArgsConstructor
 public class StudentController {
 
     private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
     @GetMapping("/students")
     public ResponseEntity<List<StudentDto>> getStudent(){
         return ResponseEntity.status(OK).body(studentService.getStudentsList());
@@ -36,8 +38,7 @@ public class StudentController {
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/students/{id}")
-    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id,@RequestBody CreateStudentDto createStudentDto){
-            // Implementation for updating a student would go here
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id,@RequestBody @Valid CreateStudentDto createStudentDto){
            return ResponseEntity.status(OK).body(studentService.updateStudent(id, createStudentDto));
     }
     @PatchMapping("/students/{id}")
@@ -45,4 +46,3 @@ public class StudentController {
         return ResponseEntity.status(OK).body(studentService.modifyStudent(id,updates));
     }
     }
-
