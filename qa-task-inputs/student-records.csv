@@ -1,0 +1,6 @@
+case_id,stage,record_label,name,email,expected_state
+RI-01,baseline,A,QA Lifecycle A,qa.lifecycle.a@example.test,Visible with its own generated ID
+RI-02,baseline,B,QA Lifecycle B,qa.lifecycle.b@example.test,Visible with its own generated ID
+RI-03,update,A,QA Lifecycle A Updated,qa.lifecycle.a.updated@example.test,Only record A changes after save and browser reload
+RI-04,delete,A,,,Record A is absent after deletion and browser reload
+RI-05,retention,B,QA Lifecycle B,qa.lifecycle.b@example.test,Record B remains unchanged through every stage
